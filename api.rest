@@ -1,0 +1,69 @@
+###
+GET http://localhost:4000/api/products
+
+###
+POST http://localhost:4000/api/products
+content-Type: application/json
+
+{
+    "reference":3,
+    "name": "Aretes",
+    "price_purchase": 1000,
+    "price_sale": 2000,
+    "stock": 5
+}
+
+###
+GET http://localhost:4000/api/products/60083fd40922ed73446780a0
+
+###
+DELETE http://localhost:4000/api/products/6019c20ebf02935af2ad206f
+
+###
+PUT http://localhost:4000/api/products/6019c24375fb795ca047ffc8
+content-Type: application/json
+
+{
+    "name":"Labial"
+}
+
+//==================================Order=============================//
+###
+GET http://localhost:4000/api/orders
+
+###
+POST http://localhost:4000/api/orders
+content-Type: application/json
+
+{
+    "product":"6019c24375fb795ca047ffc8",
+    "price": 2000,
+    "amount": 1
+}
+
+###
+GET http://localhost:4000/api/orders/601c614160c608787a2ed68d
+
+###
+DELETE http://localhost:4000/api/orders/601c614160c608787a2ed68d
+
+//===========================SALE===============================//
+
+###
+GET http://localhost:4000/api/sales
+
+###
+POST http://localhost:4000/api/sales
+content-Type: application/json
+
+{
+    "orders":["601c6267b9110f796b8c8f50","601c626bb9110f796b8c8f51","601c5dfc249f587471c2cc1e"],
+    "date": "2021-02-02T21:21:07.659Z"
+}
+
+###
+GET http://localhost:4000/api/sales/601c67071fa9017f1a9ee86e
+
+###
+DELETE http://localhost:4000/api/sales/601c67071fa9017f1a9ee86e
+
