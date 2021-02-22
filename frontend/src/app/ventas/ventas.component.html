@@ -1,0 +1,44 @@
+<nav class="bg-primary p-3 mb-4">
+    <h1 class="text-light text-center">Ventas</h1>
+</nav>
+
+<div class="content">
+    <div class="row">
+        <div class="col-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username"
+                                aria-describedby="basic-addon1" name="filterProducts">
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 g-4">
+                    <div class="col" *ngFor="let sale of sales">
+                        <div class="card mb-3">
+                            <h3 class="card-header">{{sale.date}}</h3>
+                            <div class="card-body row" *ngFor="let order of sale.orders">
+                                <h6 class="col card-subtitle text-muted mb-3">{{order.product | product}}</h6>
+                                <h6 class="col card-subtitle text-muted mb-3" mb-3>{{order.amount}}</h6>
+                                <h6 class="col card-subtitle text-muted mb-3">
+                                    {{facturasService.formatCurrency(order.price)}} </h6>
+                            </div>
+                            <div class="card-body row">
+                                <h6 class="col card-subtitle text-muted mb-3"></h6>
+                                <h6 class="col card-subtitle text-muted mb-3" mb-3>Total:</h6>
+                                <h6 class="col card-subtitle text-muted mb-3">{{facturasService.formatCurrency(totalSale(sale))}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+
+        </div>
+    </div>

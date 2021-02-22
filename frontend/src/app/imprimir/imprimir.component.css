@@ -1,0 +1,18 @@
+*{
+    color: black;
+    border-color: black;
+}
+.card{
+    margin-left: -10px;
+}
+
+td{
+    margin-bottom: 0px;
+    padding: 0px;
+    padding-left: 10px;
+}
+
+.space{
+    padding: 3px;
+    padding-left: 10px;
+}

@@ -1,0 +1,64 @@
+<div class="card" style="width: 18rem;">
+  <h1 class="text-center">MILA COSMETICS</h1>
+  <div class="card-header text-center" ngDefaultControl [(ngModel)]="amount">
+    <h5>Factura de Venta # {{amount}} </h5>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-center">
+      Maria Camila Tovar Calderón <br>
+      C.C 1049649657 <br>
+      Direccion: Calle 17 # 13-89
+    </li>
+    <li class="list-group-item" [(ngModel)]="currentDate">
+      Fecha: {{currentDate}}<br>
+      Cliente: Ventas D. <br>
+      NIT/CC: N/A <br>
+      Dir: N/A
+    </li>
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let order of facturasService.orders">
+        <tr>
+          <td> {{order.product.name}}</td>
+          <td> {{order.amount}}</td>
+          <td> {{facturasService.formatCurrency(order.price)}}</td>
+        </tr>
+      </tbody>
+      <br>
+      <tr>
+        <td class="space"></td>
+        <td class="space"><strong>Valor Total:</strong></td>
+        <td class="space">{{facturasService.formatCurrency(facturasService.total)}}</td>
+      </tr>
+      <tr>
+        <td class="space"></td>
+        <td class="space"><strong>Cancelo:</strong></td>
+        <td class="space">{{facturasService.formatCurrency(facturasService.pago)}}</td>
+      </tr>
+      <tr>
+        <td class="space"></td>
+        <td class="space"><strong>Cambio:</strong></td>
+        <td class="space">{{facturasService.formatCurrency(facturasService.pago-facturasService.total)}}</td>
+      </tr>
+    </table>
+
+    <li class="list-group-item"></li>
+    <li class="list-group-item">
+      Caja #: 1 <br>
+      Cajer@: Camila <br>
+      Observacion: N/A <br>
+    </li>
+    <li class="list-group-item text-center">
+      <h3>Gracias Por Tu Compra!!!</h3>
+    </li>
+  </ul>
+</div>

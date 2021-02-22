@@ -1,0 +1,84 @@
+<nav class="bg-primary p-3 mb-4">
+    <h1 class="text-light text-center">FACTURAS</h1>
+</nav>
+
+<div class="content">
+    <div class="row">
+        <div class="col-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username"
+                                aria-describedby="basic-addon1" name="filterProducts" [(ngModel)]="filterProducts">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input [(ngModel)]="referenceAdd" type="text" class="form-control" placeholder="Añadir..."
+                                aria-label="Recipient's username" aria-describedby="button-addon2"
+                                (change)='addtoBuy(referenceAdd)'>
+                            <button class="btn btn-primary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 g-4">
+                    <div class="col" *ngFor="let product of productosService.products | filter:filterProducts">
+                        <div class="card mb-3">
+                            <h3 class="card-header">{{product.name}}</h3>
+                            <div class="card-body">
+                                <h6 class="card-subtitle text-muted mb-3">Ref: {{product.reference}}</h6>
+                                <h6 class="card-subtitle text-muted mb-3" mb-3>Stock: {{product.stock}}</h6>
+                                <h6 class="card-subtitle text-muted mb-3">Precio: {{product.price_sale}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container" style="max-height: 80vh;">
+                <div class="card mb-3" style="max-height: 70vh; overflow: scroll;">
+                    <form #productForm="ngForm">
+                        <h3 class="card-header text-center">FACTURA</h3>
+                        <div class="card-body" *ngFor="let order of facturasService.orders">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">{{order.product.name}}</div>
+                                        <div class="col-2">{{order.amount}}</div>
+                                        <div class="col-4">{{facturasService.formatCurrency(order.price)}}</div>
+                                        <div class="col-2"><button class="btn btn-secondary"
+                                                (click)="deletetoBuy(order)">-</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4"><span class="input-group-text">Total</span></div>
+                                <div class="col-4"> <input type="text" class="form-control" placeholder="Pago.."
+                                        aria-label="Username" [(ngModel)]="facturasService.pago"></div>
+                                <div class="col-4">
+                                    <p name="fieldName" ngDefaultControl class="input-group-text"
+                                        [(ngModel)]="facturasService.total">{{facturasService.formatCurrency(facturasService.total)}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <a [routerLink]="['/imprimir']" routerLinkActive="router-link-active" class="btn btn-primary btn-lg btn-block" (click)="addOrders()">Imprimir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    

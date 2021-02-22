@@ -1,0 +1,118 @@
+<nav class="bg-primary p-3 mb-4">
+    <h1 class="text-light text-center">PRODUCTOS</h1>
+</nav>
+
+<div class="content">
+    <div class="row">
+        <div class="col-8">
+            <div class="container">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <fa-icon [icon]="faSearch"></fa-icon>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username"
+                        aria-describedby="basic-addon1" name="filterProducts" [(ngModel)]="filterProducts">
+                </div>
+                <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 g-4">
+                    <div class="col" *ngFor="let product of productosService.products | filter:filterProducts">
+                        <div class="card mb-3">
+                            <h3 class="card-header">{{product.name}}</h3>
+                            <div class="card-body">
+                                <h6 class="card-subtitle text-muted mb-3">Ref: {{product.reference}}</h6>
+                                <h6 class="card-subtitle text-muted mb-3" mb-3>Stock: {{product.stock}}</h6>
+                                <h6 class="card-subtitle text-muted mb-3">P. Compra: {{product.price_purchase}}</h6>
+                                <h6 class="card-subtitle text-muted mb-3">P. Venta: {{product.price_sale}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input [(ngModel)]="referenceAdd" type="text" class="form-control" placeholder="Añadir existencia"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" type="button" id="button-addon2" (click)='addExistence(referenceAdd)'>+</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input [(ngModel)]="referenceRemove" type="text" class="form-control" placeholder="Eliminar existencia"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-secondary" type="button" id="button-addon2"
+                            (click)='removeExistence(referenceRemove)'>-</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <form #productForm="ngForm">
+                                <h3 class="card-header">REGISTRAR PRODUCTO</h3>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="reference" ngModel required #reference="ngModel"
+                                            class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Referencia">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="name" ngModel required #name="ngModel"
+                                            class="form-control" aria-describedby="basic-addon3" placeholder="Nombre">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="price_purchase" ngModel required
+                                            #price_purchase="ngModel" class="form-control"
+                                            aria-describedby="basic-addon3" placeholder="Precio de Compra">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="price_sale" ngModel required #price_sale="ngModel"
+                                            class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Precio de Venta">
+                                    </div>
+                                    <div class="d-md-flex justify-content-md-end">
+                                        <button class="btn btn-primary me-md-2" type="button" (click)="addProduct(productForm)">Añadir</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <form>
+                                <h3 class="card-header">ACTUALIZAR PRODUCTO</h3>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <input ngModel required #reference="ngModel" name="reference" type="text"
+                                            name="reference" class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Referencia" [(ngModel)]='selectedProduct.reference'
+                                            (change)='selectProduct(selectedProduct.reference)'>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input ngModel required #price_purchase="ngModel" name="price_purchase"
+                                            type="text" class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Precio de Compra" [(ngModel)]='selectedProduct.price_purchase'>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input ngModel required #price_sale="ngModel" name="price_sale" type="text"
+                                            class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Precio de Venta" [(ngModel)]='selectedProduct.price_sale'>
+                                    </div>
+                                    <div class="d-md-flex justify-content-md-end">
+                                        <button class="btn btn-secondary me-md-2" type="button"
+                                            (click)="updateProductAlert(selectedProduct)">Actualizar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

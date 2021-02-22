@@ -9,10 +9,22 @@ ordersCtrl.getOrders = async (req,res) => {
     res.json(products)
 }
 
+
+
 ordersCtrl.addOrder = async (req,res) => {
-    const newOrder = new Order(req.body)
-    await newOrder.save()
-    res.send({message:'Product has been added to purchase'})
+    const orders = req.body;
+    let resOrders = [];
+    await orders.forEach ( async (element) => {
+        const newOrder = new Order(element)
+        const add = await newOrder.save()
+        resOrders.push(add)
+        console.log(resOrders)
+    });
+
+    setTimeout(()=>{
+     res.send({message:'Product has been added to purchase', orders:resOrders})
+    },500);
+    
 }
 
 ordersCtrl.getOrder = async (req,res) => {
