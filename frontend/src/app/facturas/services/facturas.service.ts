@@ -41,6 +41,14 @@ export class FacturasService {
     return this.http.get(this.URL_API_SALES)
   }
 
+  getSalesDay(){
+    return this.http.get(this.URL_API_SALES+"/day")
+  }
+
+  getSalesMonth(){
+    return this.http.get(this.URL_API_SALES+"/month")
+  }
+
   formatCurrency(value){
     return this.formatPeso.format(value);
   }

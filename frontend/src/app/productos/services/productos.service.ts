@@ -24,6 +24,10 @@ export class ProductosService {
     return this.http.put(`${this.URL_API}/${product._id}`,product)
   }
 
+  deleteProduct(product:Product){
+    return this.http.delete(`${this.URL_API}/${product._id}`)
+  }
+
   getProduct(id:string){
     return this.http.get(this.URL_API+'/'+id)
   }

@@ -5,6 +5,8 @@ const router = Router()
 const salesCtrl = require('../controller/sales.controller.js')
 
 router.get('/', salesCtrl.getSales)
+router.get('/day', salesCtrl.getSaleDay)
+router.get('/month', salesCtrl.getSaleMonth)
 router.post('/', salesCtrl.createSale)
 router.get('/:id', salesCtrl.getSale)
 router.delete('/:id', salesCtrl.deleteSale)

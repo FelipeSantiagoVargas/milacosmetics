@@ -94,6 +94,11 @@
                                             (change)='selectProduct(selectedProduct.reference)'>
                                     </div>
                                     <div class="input-group mb-3">
+                                        <input ngModel required #price_purchase="ngModel" name="name"
+                                            type="text" class="form-control" aria-describedby="basic-addon3"
+                                            placeholder="Nombre" [(ngModel)]='selectedProduct.name'>
+                                    </div>
+                                    <div class="input-group mb-3">
                                         <input ngModel required #price_purchase="ngModel" name="price_purchase"
                                             type="text" class="form-control" aria-describedby="basic-addon3"
                                             placeholder="Precio de Compra" [(ngModel)]='selectedProduct.price_purchase'>
@@ -104,8 +109,11 @@
                                             placeholder="Precio de Venta" [(ngModel)]='selectedProduct.price_sale'>
                                     </div>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <button class="btn btn-secondary me-md-2" type="button"
+                                        <button class="btn btn-primary me-md-2" type="button"
                                             (click)="updateProductAlert(selectedProduct)">Actualizar</button>
+                                            <div class="ml-5"></div>
+                                        <button class="btn btn-secondary me-md-2" type="button"
+                                            (click)="deleteProductAlert(selectedProduct)">Eliminar</button>
                                     </div>
                                 </div>
                             </form>

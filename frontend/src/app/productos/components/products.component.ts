@@ -102,6 +102,15 @@ export class ProductsComponent implements OnInit {
     );
   }
 
+  deleteProduct(selectedProduct: Product){
+    this.productosService.deleteProduct(selectedProduct).subscribe(
+      res => {
+        this.getProducts();
+      },
+      err => console.log(err)
+    );
+  }
+
   updateProductAlert(selectedProduct: Product) {
     Swal.fire({
       confirmButtonColor: '#78c2ad',
@@ -128,6 +137,41 @@ export class ProductsComponent implements OnInit {
         Swal.fire({
           title: 'Cancelado!',
           text: 'Tu producto no fue actualizado',
+          confirmButtonColor: '#78c2ad',
+          cancelButtonColor: '#f2969a',
+          icon: 'error',
+        });
+      }
+    })
+
+  }
+
+  deleteProductAlert(selectedProduct: Product) {
+    Swal.fire({
+      confirmButtonColor: '#78c2ad',
+      cancelButtonColor: '#f2969a',
+      iconColor: '#fece67',
+      title: 'Estas seguro?',
+      text: 'Eliminar producto',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          title: 'Eliminado!',
+          text: 'Tu producto ha sido eliminado con exito',
+          confirmButtonColor: '#78c2ad',
+          cancelButtonColor: '#f2969a',
+          icon: 'success',
+        });
+        this.deleteProduct(selectedProduct);
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: 'Cancelado!',
+          text: 'Tu producto no fue eliminado',
           confirmButtonColor: '#78c2ad',
           cancelButtonColor: '#f2969a',
           icon: 'error',

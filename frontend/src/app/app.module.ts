@@ -13,6 +13,7 @@ import { FacturasComponent } from './facturas/facturas.component';
 import { ImprimirComponent } from './imprimir/imprimir.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { ProductPipe } from './pipes/product.pipe';
+import { SalesPipe } from './pipes/sales.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProductPipe } from './pipes/product.pipe';
     ImprimirComponent,
     VentasComponent,
     ProductPipe,
+    SalesPipe,
   ],
   imports: [
     BrowserModule,

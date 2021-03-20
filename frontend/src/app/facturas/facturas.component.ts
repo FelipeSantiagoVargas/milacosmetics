@@ -66,14 +66,18 @@ export class FacturasComponent implements OnInit {
           });
           return false;
         }
+        console.log(value);
         value.stock = value.stock - 1;
-        this.productosService.updateProduct(value);
+        console.log(value);
+        this.productosService.updateProduct(value).subscribe(
+          res=> this.getProducts(),
+          err => console.log(err)
+        );
         return value;
       }
     });
 
     if (product) {
-      console.log(product);
       const ready = this.facturasService.orders.find((value) => {
         if (product.reference == value.product.reference) {
           value.amount = value.amount + 1;

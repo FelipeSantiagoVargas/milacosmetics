@@ -10,7 +10,7 @@
       C.C 1049649657 <br>
       Direccion: Calle 17 # 13-89
     </li>
-    <li class="list-group-item" [(ngModel)]="currentDate">
+    <li class="list-group-item" ngDefaultControl [(ngModel)]="currentDate">
       Fecha: {{currentDate}}<br>
       Cliente: Ventas D. <br>
       NIT/CC: N/A <br>
@@ -28,9 +28,9 @@
       </thead>
       <tbody *ngFor="let order of facturasService.orders">
         <tr>
-          <td> {{order.product.name}}</td>
-          <td> {{order.amount}}</td>
-          <td> {{facturasService.formatCurrency(order.price)}}</td>
+          <td class="small"> {{order.product.name}}</td>
+          <td class="small"> {{order.amount}}</td>
+          <td class="small"> {{facturasService.formatCurrency(order.price)}}</td>
         </tr>
       </tbody>
       <br>

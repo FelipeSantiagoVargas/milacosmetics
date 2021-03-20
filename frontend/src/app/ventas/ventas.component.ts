@@ -13,33 +13,85 @@ import { ProductosService } from '../productos/services/productos.service';
 })
 export class VentasComponent implements OnInit {
 
+  filterSales = '';
   faSearch = faSearch;
   product;
   public sales;
+  public salesDay;
+  public salesMonth;
   public productosComponent: ProductsComponent;
 
   constructor(public facturasService: FacturasService, public productosService: ProductosService) { }
 
   ngOnInit(): void {
     this.getSales()
+    this.getSalesDay()
+    this.getSalesMonth()
   }
 
   getSales() {
     this.facturasService.getSales().subscribe(
       res => {
         this.sales = res
+        this.transformSale(this.sales)
       },
       err => console.log(err),
     )
   }
 
-  totalSale(sale:any){
+  getSalesDay() {
+    this.facturasService.getSalesDay().subscribe(
+      res => {
+        this.salesDay = res
+        this.transformSale(this.salesDay)
+      },
+      err => console.log(err),
+    )
+  }
+
+  getSalesMonth() {
+    this.facturasService.getSalesMonth().subscribe(
+      res => {
+        this.salesMonth = res
+        this.transformSale(this.salesMonth)
+      },
+      err => console.log(err),
+    )
+  }
+
+  totalSale(sale: any) {
     let total = 0;
-    console.log(sale.orders.length);
     for (let index = 0; index < sale.orders.length; index++) {
-       total = total+sale.orders[index].price;
+      total = total + sale.orders[index].price;
     }
     return total;
+  }
+
+  totalSales(sales: Sale[]){
+    let total = 0;
+    for (let i = 0; i < sales.length; i++) {
+      total = total + this.totalSale(sales[i])
+    }
+    return total
+  }
+
+  transformSale(sales) {
+    for (let index = 0; index < sales.length; index++) {
+      const element = sales[index];
+      let date = new Date(element.date)
+      let def = "Fecha: "+date.getDate()+'/'+(date.getMonth()+1)+'/'+ date.getUTCFullYear()+' '+date.getHours()+':'+date.getMinutes()
+      element.date = def
+    }
+
+    // console.log(this.sales)
+    // for (let element in this.sales) {
+    //   console.log(element[0])
+    //   console.log('otro')
+    // let date = element.date;
+    // date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    // element.date = date
+    // console.log(element.date)
+
   }
 
 }
