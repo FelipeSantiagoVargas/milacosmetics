@@ -43,7 +43,6 @@ export class VentasComponent implements OnInit {
     this.facturasService.getSalesDay().subscribe(
       res => {
         this.salesDay = res
-        this.transformSale(this.salesDay)
       },
       err => console.log(err),
     )
@@ -53,7 +52,6 @@ export class VentasComponent implements OnInit {
     this.facturasService.getSalesMonth().subscribe(
       res => {
         this.salesMonth = res
-        this.transformSale(this.salesMonth)
       },
       err => console.log(err),
     )
