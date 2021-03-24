@@ -66,9 +66,7 @@ export class FacturasComponent implements OnInit {
           });
           return false;
         }
-        console.log(value);
         value.stock = value.stock - 1;
-        console.log(value);
         this.productosService.updateProduct(value).subscribe(
           res=> this.getProducts(),
           err => console.log(err)
@@ -102,10 +100,18 @@ export class FacturasComponent implements OnInit {
     }
   }
 
-  deletetoBuy(order: Order) {
-    order.product.stock = order.product.stock + order.amount;
+  deletetoBuy(order:Order, referenceProduct: number) {
+    const product = this.productosService.products.find((value) => {
+      if (value.reference == referenceProduct) {
+        value.stock = value.stock + order.amount;
+        this.productosService.updateProduct(value).subscribe(
+          res=> this.getProducts(),
+          err => console.log(err)
+        );
+        return value;
+      }
+    });
     this.facturasService.orders.splice(this.facturasService.orders.indexOf(order), 1);
-    this.productosService.updateProduct(order.product);
     this.updateTotal(this.facturasService.orders);
   }
 

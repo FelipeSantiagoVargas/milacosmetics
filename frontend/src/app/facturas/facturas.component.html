@@ -52,7 +52,7 @@
                                         <div class="col-2">{{order.amount}}</div>
                                         <div class="col-4">{{facturasService.formatCurrency(order.price)}}</div>
                                         <div class="col-2"><button class="btn btn-secondary"
-                                                (click)="deletetoBuy(order)">-</button></div>
+                                                (click)="deletetoBuy(order, order.product.reference)">-</button></div>
                                     </div>
                                 </div>
                             </div>
