@@ -37,6 +37,63 @@ salesCtrl.getSaleMonth = async (req,res) => {
     res.send(orders)
 }
 
+salesCtrl.getAllMonths = async (req,res) => {
+    console.log('entro')
+    const query = [
+        {
+          $group: {
+            _id: {
+              year: {
+                $year: "$createdAt"
+              },
+              mes: {
+                $month: "$createdAt"
+              }
+            },
+            ventas: {
+              $push: {
+                total: "$price",
+                
+              }
+            }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            year: "$_id.year",
+            mes: "$_id.mes",
+            total: {
+              $reduce: {
+                input: "$ventas",
+                initialValue: 0,
+                in: {
+                  $sum: [
+                    "$$value",
+                    "$$this.total"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          $group: {
+            _id: "$year",
+            ventas: {
+              $push: {
+                mes: "$mes",
+                total: "$total"
+              }
+            }
+          }
+        }
+      ]
+
+    const sale = await Order.aggregate(query)
+    res.send(sale)
+}
+
 salesCtrl.deleteSale = async (req,res) => {
     await Sale.findByIdAndDelete(req.params.id)
     res.json({status:'Sale Deleted'})
