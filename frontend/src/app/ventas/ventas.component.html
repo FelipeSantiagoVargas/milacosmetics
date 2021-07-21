@@ -10,8 +10,12 @@
                     <div class="col">
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Total Ventas Del Mes:</h5>
+                            <h5 class="card-title">Total Ventas Del Mes: </h5>
                             <p class="card-text">{{facturasService.formatCurrency(totalSales(salesMonth))}}</p>
+                            <a (click)='prueba()' href="http://localhost:4000/static/extractos.xls"><span class="input-group-text download" id="basic-addon1">
+                                <fa-icon [icon]="faDownload"></fa-icon>
+                            </span></a>
+                            
                           </div>
                         </div>
                       </div>

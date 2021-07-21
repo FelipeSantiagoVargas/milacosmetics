@@ -91,6 +91,25 @@ salesCtrl.getAllMonths = async (req,res) => {
       ]
 
     const sale = await Order.aggregate(query)
+
+
+    var fs = require('fs');
+    var writeStream = fs.createWriteStream("./src/public/extractos.xls");
+    var header="Año"+"\t"+"Mes"+"\t"+"Ventas"+"\n";
+      
+    writeStream.write(header);
+
+    for (let i = 0; i < sale.length; i++) {
+        let row = ''+sale[i]._id;
+        for (let j = 0; j < sale[i].ventas.length; j++) {
+            console.log('entro')
+            row = row + "\t"+sale[i].ventas[j].mes+"\t"+sale[i].ventas[j].total+"\n";
+            writeStream.write(row);
+            row = ''+sale[i]._id;
+        }
+    }
+
+    writeStream.close();
     res.send(sale)
 }
 

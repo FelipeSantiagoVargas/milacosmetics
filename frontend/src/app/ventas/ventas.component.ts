@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch,faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Order } from '../facturas/models/orders.model';
 import { Sale } from '../facturas/models/sale.model';
 import { FacturasService } from '../facturas/services/facturas.service';
@@ -15,6 +15,7 @@ export class VentasComponent implements OnInit {
 
   filterSales = '';
   faSearch = faSearch;
+  faDownload = faDownload;
   product;
   public sales;
   public salesDay;
@@ -22,6 +23,16 @@ export class VentasComponent implements OnInit {
   public productosComponent: ProductsComponent;
 
   constructor(public facturasService: FacturasService, public productosService: ProductosService) { }
+
+  prueba(){
+    console.log('holaaaaaaa')
+    this.facturasService.getAllSales().subscribe(
+      res => {
+        console.log(res)
+      },
+      err => console.log(err),
+    )
+  }
 
   ngOnInit(): void {
     this.getSales()

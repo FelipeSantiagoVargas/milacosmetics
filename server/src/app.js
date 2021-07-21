@@ -10,6 +10,9 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(express.static('public'));
+app.use('/static', express.static(__dirname + '/public'));
+
 
 app.use('/api/products',require('./routes/products.routes'))
 app.use('/api/orders',require('./routes/orders.routes'))
